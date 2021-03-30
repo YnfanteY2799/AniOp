@@ -21,14 +21,17 @@ const Navbar = ({title , renderer }) =>{
     return(
         <div>
             <nav className="navBar">
-                <ul className="navBar-nav-start" style={{position:'absolute'}}>
-                    {title.title}
-                    <input></input>
+                <ul className="navBar-nav">
+                    <div className="navBar-nav-start">
+                        {title.title}
+                    </div>
+                    <div className="navBar-nav-center">
+                        <input className="input is-primary" type="text"></input>
+                    </div>
+                    <div className="navBar-nav-end">
+                        {renderer.map((x, i) => renderItems(x,i))}
+                    </div>
                 </ul>
-                <ul className="navBar-nav-end">
-                    {renderer.map((x, i) => renderItems(x,i))}
-                </ul>
-
             </nav>
         </div>
     );

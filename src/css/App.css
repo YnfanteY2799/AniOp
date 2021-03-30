@@ -14,7 +14,6 @@ ul{
   padding: 0;
 }
 
-
 a{
   color:var(--text-color);
   text-decoration: none;
@@ -58,6 +57,13 @@ a{
 }
 
 .nav-item{
+  width: calc(var(--nav-size) * 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-logo{
   width: calc(var(--nav-size) * 0.8);
   display: flex;
   align-items: center;
