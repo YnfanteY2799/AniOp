@@ -1,114 +1,65 @@
 import { useState } from 'react';
-import { CSSTransition } from "react-transition-group";
 
-// Functions
+//Component
+const NavbarItem = ({compName, compRoute}) => (
+    <a className="navbar-item is-capitalized" href={`${compRoute}`}>{compName}</a>
+);
 
-const renderItems = ( items, key ) => {
+const NavBarMenuItem = ({compName, }) =>{
 
-    const { icon, child, link} = items;
-    return (
-        <NavItem icon={icon} link={link} key={key}>
-            {child !== null && <OptionsPerMenu opts={child}/>}
-        </NavItem>
-    );
+
 
 }
 
-// Components
-const Navbar = ({title , renderer }) =>{
+const renderOpts = (optsArr) => {   
 
+    return optsArr.map(x => {
+    
+        return typeof(x) === 'object' ? 
+        <NavBarMenuItem /> :
+        <NavbarItem compRoute={x} compName={x}/>
+
+    });
+
+}
+  
+// const navbarItems = [].map(page => <NavbarItem page={page} key={page} />);
+
+const NavBar = ({titleObject, items}) => {
+
+    const [activeBurgerMenu, setActiveBurgerMenu] = useState(false);
+    const {altName, route} = titleObject;
 
     return(
-        <div>
-            <nav className="navBar">
-                <ul className="navBar-nav">
-                    <div className="navBar-nav-start">
-                        {title.title}
-                    </div>
-                    <div className="navBar-nav-center">
-                        <input className="input is-primary" type="text"></input>
-                    </div>
-                    <div className="navBar-nav-end">
-                        {renderer.map((x, i) => renderItems(x,i))}
-                    </div>
-                </ul>
-            </nav>
-        </div>
+        <nav className="navbar is-black">
+            
+            {/* NavBar Brand -> starting part of nav */}
+            <div className="navbar-brand">
+                
+                <NavbarItem compName={altName} compRoute={route}/>
+                
+                <a className={activeBurgerMenu ? "navbar-burger is-active" : "navbar-burger"} 
+                aria-label="menu" 
+                aria-expanded="false"
+                onClick={() => setActiveBurgerMenu(!activeBurgerMenu)}
+                >
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            {/* Sub Sequent part of nav */}
+            <div className={`${activeBurgerMenu ? "navbar-menu is-active" : "navbar-menu navbar-end"}`}>
+                {renderOpts(items)}
+            </div>
+
+
+      </nav>
     );
 
 }
 
-// const Logo = ({logo, link}) => (<a href={link}>{logo}</a>);
-
-const NavItem = ({icon, children, link}) =>{ 
-
-    const [open,setOpen] = useState(false);
-
-   return(
-    <li className="nav-item">
-        
-        <a href={link} className="icon-button" onClick={()=> setOpen(!open)}>
-            {icon}
-        </a>
-
-        {open && children}
-
-    </li>
-    );
-};
-
-const DdownMenu = ({children, activeMenu}) =>{
-
-    return( 
-        <div className="ddown">
-            
-            <CSSTransition in={activeMenu === 'main'} 
-            unmountOnExit timeout={500} classNames="menu-primary">    
-                <div className="menu">
-                    {children}
-                </div>
-            </CSSTransition>
-
-        </div>
-    )
-
-}
-
-const DdownItem = ({ leftIcon, link, divName}) => {
-
-    return(
-        <a className="menu-item" href={link}>
-            <span className="icon-left">{leftIcon}</span>
-                {divName}
-            <span className="icon-right"></span>
-        </a>
-    );
-}
-
-const OptionsPerMenu = ({opts}) =>{
-
-    const [activeMenu, setActiveMenu] = useState('main');
-
-    console.log(opts)
-
-    return(
-        <DdownMenu activeMenu={activeMenu}>
-            {opts.map((x,i) => 
-            
-                <DdownItem key={i} 
-                leftIcon={x.icon} 
-                divName={x.name} 
-                link={x.goToMenu === null ? x.route : null}
-                onClick={x.goToMenu && setActiveMenu( )}
-                />
-            
-            )}
-        </DdownMenu>
 
 
-    )
-
-}
-
-
-export { Navbar, NavItem };
+export { NavBar };

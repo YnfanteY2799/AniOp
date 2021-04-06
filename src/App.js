@@ -1,31 +1,22 @@
-import { ReactComponent as Jason } from "./src/svg/jason.svg"; 
-import { ReactComponent as Katana } from "./src/svg/katana.svg"; 
-import { ReactComponent as Banner } from "./src/svg/knight-banner.svg"; 
-import { ReactComponent as AnimeTitleTest } from "./src/svg/cutter-svgrepo-com.svg"; 
+import { NavBar } from "./components/home/NavbarComponent";
 
-import { Navbar } from "./components/home/NavbarComponent";
+const titleProps = {
+
+  altName:"AniOpe",
+  route:"/"
+};
+
 
 const App = () =>{
-  const renderer = [
-    {icon:<Jason/>,child:null, ref:"#"},
-    {icon:<Katana/>,child:null, ref:"#"},
-    {icon:<Banner/>,child:null, ref:"#"},
-  ];
-
-  const baseTitle = {
-    title:"AniOp",
-    description:"Anime opening Site",
-    href:"#",
-    icon:<AnimeTitleTest/>
-  }
 
   return(
     <div>
-      <Navbar 
-      title={baseTitle} 
-      renderer={renderer}
+    
+      <NavBar 
+      titleObject={titleProps}
+      items={["Log In", "Sign Up", "Help"]}
       />
-
+    
     </div>  
   );
 }
