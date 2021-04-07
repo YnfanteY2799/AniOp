@@ -1,23 +1,24 @@
 import { NavBar } from "./components/home/NavbarComponent";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 
-const titleProps = {
-
-  altName:"AniOpe",
-  route:"/"
-};
-
+const routes = [
+  {type:"title", to:"/", rName:"AnimeOpe"},
+  {type:"opt", to:"/login", rName:"Log-In"},
+];
 
 const App = () =>{
 
   return(
-    <div>
+    <Router>
+      <div>
+        <NavBar items={routes}/>
+        <Switch>
+
     
-      <NavBar 
-      titleObject={titleProps}
-      items={["Log In", "Sign Up", "Help"]}
-      />
-    
-    </div>  
+
+        </Switch>
+      </div>  
+    </Router>
   );
 }
 

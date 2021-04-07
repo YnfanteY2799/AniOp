@@ -1,34 +1,40 @@
 import { useState } from 'react';
+import { Link, Route} from "react-router-dom";
 
 //Component
-const NavbarItem = ({compName, compRoute}) => (
-    <a className="navbar-item is-capitalized" href={`${compRoute}`}>{compName}</a>
+const NavbarItem = ({routeTo, routeName}) => (
+    <Link className="navbar-item is-capitalized" to={routeTo}>
+        {routeName}
+    </Link>
 );
 
-const NavBarMenuItem = ({compName, }) =>{
-
-
-
+const NavBarMenuItem = ({routeTo, routeName}) =>{
+    return <Link className="navbar-item is-capitalized" to={routeTo}>
+        {routeName}
+    </Link>
 }
 
 const renderOpts = (optsArr) => {   
 
-    return optsArr.map(x => {
-    
-        return typeof(x) === 'object' ? 
-        <NavBarMenuItem /> :
-        <NavbarItem compRoute={x} compName={x}/>
+    return optsArr.map((x,i) => {
+        
+        const {rName, to, type, extraOpts} = x;
+        
+        if(type === "opt"){
+            return <NavbarItem key={i} routeTo={to} routeName={rName}/>
+        }else{
+            return <NavBarMenuItem key={i} routeTo={to} routeName={rName} extraOpts={extraOpts}/>
+        }
 
     });
 
 }
   
-// const navbarItems = [].map(page => <NavbarItem page={page} key={page} />);
-
-const NavBar = ({titleObject, items}) => {
+const NavBar = ({items}) => {
 
     const [activeBurgerMenu, setActiveBurgerMenu] = useState(false);
-    const {altName, route} = titleObject;
+    const {rName, to} = items[0];
+
 
     return(
         <nav className="navbar is-black">
@@ -36,20 +42,25 @@ const NavBar = ({titleObject, items}) => {
             {/* NavBar Brand -> starting part of nav */}
             <div className="navbar-brand">
                 
-                <NavbarItem compName={altName} compRoute={route}/>
-                
-                <a className={activeBurgerMenu ? "navbar-burger is-active" : "navbar-burger"} 
-                aria-label="menu" 
-                aria-expanded="false"
-                onClick={() => setActiveBurgerMenu(!activeBurgerMenu)}
-                >
+                <NavbarItem routeTo={to} routeName={rName}/>
+                <div className={activeBurgerMenu ? "navbar-burger is-active" : "navbar-burger"} 
+                aria-label="menu" aria-expanded="false" onClick={() => setActiveBurgerMenu(!activeBurgerMenu)}>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
-                </a>
+                </div>
+            
             </div>
 
-            {/* Sub Sequent part of nav */}
+            {/* Sub Sequent part of nav - 1*/}
+            <div className={`${activeBurgerMenu ? "navbar-menu is-active" : "navbar-menu"}`} 
+            style={activeBurgerMenu ? {display:'flex'} : {display:'flex', justifyContent:'flex-end'}}>
+                <div className="navbar-item field">
+                    <input className="input" type="search" placeholder="Search..."/>
+                </div>
+            </div>
+
+            {/* Sub Sequent part of nav - 2*/}
             <div className={`${activeBurgerMenu ? "navbar-menu is-active" : "navbar-menu navbar-end"}`}>
                 {renderOpts(items)}
             </div>
