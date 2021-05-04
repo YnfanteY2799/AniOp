@@ -1,20 +1,20 @@
 import { useState } from 'react';
-import { Link, Route} from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 
 //Component
-const NavbarItem = ({routeTo, routeName}) => (
+const NavbarItem = ({ routeTo, routeName }) => (
     <Link className="navbar-item is-capitalized" to={routeTo}>
         {routeName}
     </Link>
 );
 
-const NavBarMenuItem = ({routeTo, routeName}) =>{
+const NavBarMenuItem = ({ routeTo, routeName }) =>{
     return <Link className="navbar-item is-capitalized" to={routeTo}>
         {routeName}
     </Link>
 }
 
-const renderOpts = (optsArr) => {   
+const renderOpts = ( optsArr ) => {   
 
     return optsArr.map((x,i) => {
         
@@ -30,7 +30,7 @@ const renderOpts = (optsArr) => {
 
 }
   
-const NavBar = ({items}) => {
+const NavBar = ({ items }) => {
 
     const [activeBurgerMenu, setActiveBurgerMenu] = useState(false);
     const {rName, to} = items[0];
