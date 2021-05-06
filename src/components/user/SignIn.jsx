@@ -31,11 +31,11 @@ const SignIn  = (  ) =>{
                     type="text" placeholder="Password" 
                     value={passWord} onChange={(e)=>setPassWord(e.target.value)}
                     />
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-envelope"></i>
+                    <span className="icon is-small is-left">
+                        <i className="fas fa-envelope"></i>
                     </span>
-                    <span class="icon is-small is-right">
-                        <i class="fas fa-exclamation-triangle"></i>
+                    <span className="icon is-small is-right">
+                        <i className="fas fa-exclamation-triangle"></i>
                     </span>
                 </div>
                 {/* <p class="help is-success">This username is available</p> */}
