@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //Component
 const NavbarItem = ({ routeTo, routeName }) => (
@@ -22,8 +22,10 @@ const renderOpts = ( optsArr ) => {
         
         if(type === "opt"){
             return <NavbarItem key={i} routeTo={to} routeName={rName}/>
-        }else{
+        }else if(type === "ddOpt"){
             return <NavBarMenuItem key={i} routeTo={to} routeName={rName} extraOpts={extraOpts}/>
+        }else{
+            return <NavbarItem key={i} routeTo={to} routeName={rName}/>
         }
 
     });
@@ -34,7 +36,6 @@ const NavBar = ({ items }) => {
 
     const [activeBurgerMenu, setActiveBurgerMenu] = useState(false);
     const {rName, to} = items[0];
-
 
     return(
         <nav className="navbar is-black">
@@ -70,7 +71,5 @@ const NavBar = ({ items }) => {
     );
 
 }
-
-
 
 export { NavBar };

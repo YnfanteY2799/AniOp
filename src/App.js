@@ -1,21 +1,28 @@
 import { NavBar } from "./components/home/NavbarComponent";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PublicOpeningsGetter from "./components/public/PublicOpeningsGetter";
+import Login from "./components/user/LogIn";
+import SigIn from "./components/user/SignIn";
 
 const routes = [
-  {type:"title", to:"/", rName:"AnimeOpe"},
-  {type:"opt", to:"/login", rName:"Log-In"},
+  {type:"title", to:"/", rName:"AnimeOpe",component:null},
+  {type:"opt", to:"/login", rName:"Log-In",component:Login},
+  {type:"opt", to:"/singIn", rName:"Sign In",component:SigIn},
+  {type:"opt", to:"/Public/Search", rName:"Opening",component:PublicOpeningsGetter},
 ];
 
-const App = () =>{
 
+
+const App = () =>{
   return(
     <Router>
       <div>
         <NavBar items={routes}/>
         <Switch>
-
-    
-
+          {routes.map(xe => 
+            xe.component !== null && 
+            <Route path={xe.to} exact>{xe.component}</Route>
+          )}
         </Switch>
       </div>  
     </Router>
