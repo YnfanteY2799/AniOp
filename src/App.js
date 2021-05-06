@@ -9,6 +9,11 @@ const routes = [
   {type:"opt", to:"/login", rName:"Log-In",component:Login},
   {type:"opt", to:"/singIn", rName:"Sign In",component:SignIn},
   {type:"opt", to:"/Public/Search", rName:"Opening",component:PublicOpeningsGetter},
+  {type:"ddOpt", to:null, rName:"About", component:null, opts:[
+    {to:"About/login", rName:"Log-In",component:Login},
+    {to:"About/singIn", rName:"Sign In",component:SignIn},
+  ]},
+
 ];
 
 

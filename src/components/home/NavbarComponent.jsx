@@ -8,24 +8,41 @@ const NavbarItem = ({ routeTo, routeName }) => (
     </Link>
 );
 
-const NavBarMenuItem = ({ routeTo, routeName }) =>{
-    return <Link className="navbar-item is-capitalized" to={routeTo}>
-        {routeName}
-    </Link>
+// const NavBarMenuItem = ({ routeTo, routeName }) =>{
+//     return <Link className="navbar-item is-capitalized" to={routeTo}>
+//         {routeName}
+//     </Link>
+// }
+
+const NavBarOptionsMenuItem = ({ routeName, extraOpts, }) =>{
+    return (
+        <div className="navbar-item has-dropdown is-hoverable">
+            <b className="navbar-link">
+            {routeName}
+            </b>
+            <div className="navbar-dropdown">
+                {extraOpts.map(x => <Link className="navbar-item" to={x.to}>{x.rName}</Link>)}
+            </div>
+        </div>
+    );
+
 }
+
 
 const renderOpts = ( optsArr ) => {   
 
     return optsArr.map((x,i) => {
         
-        const {rName, to, type, extraOpts} = x;
+        const {rName, to, type, opts} = x;
         
         if(type === "opt"){
             return <NavbarItem key={i} routeTo={to} routeName={rName}/>
         }else if(type === "ddOpt"){
-            return <NavBarMenuItem key={i} routeTo={to} routeName={rName} extraOpts={extraOpts}/>
-        }else{
+            return <NavBarOptionsMenuItem key={i} routeName={rName} extraOpts={opts}/>
+        }else if(type === "title"){
             return <NavbarItem key={i} routeTo={to} routeName={rName}/>
+        }else{
+
         }
 
     });
