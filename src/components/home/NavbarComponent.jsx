@@ -39,10 +39,8 @@ const renderOpts = ( optsArr ) => {
             return <NavbarItem key={i} routeTo={to} routeName={rName}/>
         }else if(type === "ddOpt"){
             return <NavBarOptionsMenuItem key={i} routeName={rName} extraOpts={opts}/>
-        }else if(type === "title"){
-            return <NavbarItem key={i} routeTo={to} routeName={rName}/>
         }else{
-
+            return type !== "title" && <NavbarItem key={i} routeTo={to} routeName={rName}/>
         }
 
     });
@@ -71,10 +69,12 @@ const NavBar = ({ items }) => {
             </div>
 
             {/* Sub Sequent part of nav - 1*/}
-            <div className={`${activeBurgerMenu ? "navbar-menu is-active" : "navbar-menu"}`} 
+            <div className={`navbar-menu`} 
             style={activeBurgerMenu ? {display:'flex'} : {display:'flex', justifyContent:'flex-end'}}>
-                <div className="navbar-item field">
-                    <input className="input" type="search" placeholder="Search..."/>
+                <div className="navbar-item">
+                    <div class="field is-grouped">
+                        <input className="input" type="search" placeholder="Search..."/>
+                    </div>
                 </div>
             </div>
 
