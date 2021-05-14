@@ -10,13 +10,10 @@ const routes = [
   {type:"opt", to:"/singIn", rName:"Sign In",component:SignIn},
   {type:"opt", to:"/Public/Search/Random", rName:"Random",component:PublicOpeningsGetter},
   {type:"ddOpt", to:null, rName:"About", component:null, opts:[
-    {to:"/About/login", rName:"Log-In",component:Login},
-    {to:"/About/singIn", rName:"Sign In",component:SignIn},
+    
   ]},
 
 ];
-
-
 
 const App = () =>{
   return(
@@ -24,9 +21,9 @@ const App = () =>{
       <div>
         <NavBar items={routes}/>
         <Switch>
-          {routes.map(xe => 
+          {routes.map((xe,i) => 
             xe.component !== null && 
-            <Route path={xe.to} exact={true}>{<xe.component/>}</Route>
+            <Route key={i} path={xe.to} exact={true}>{<xe.component/>}</Route>
           )}
         </Switch>
       </div>  

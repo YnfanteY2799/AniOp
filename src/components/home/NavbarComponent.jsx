@@ -21,7 +21,7 @@ const NavBarOptionsMenuItem = ({ routeName, extraOpts, }) =>{
             {routeName}
             </b>
             <div className="navbar-dropdown">
-                {extraOpts.map(x => <Link className="navbar-item" to={x.to}>{x.rName}</Link>)}
+                {extraOpts.map((x,idx) => <Link key={idx} className="navbar-item" to={x.to}>{x.rName}</Link>)}
             </div>
         </div>
     );
@@ -72,7 +72,7 @@ const NavBar = ({ items }) => {
             <div className={`navbar-menu`} 
             style={activeBurgerMenu ? {display:'flex'} : {display:'flex', justifyContent:'flex-end'}}>
                 <div className="navbar-item">
-                    <div class="field is-grouped">
+                    <div className="field is-grouped">
                         <input className="input" type="search" placeholder="Search..."/>
                     </div>
                 </div>
