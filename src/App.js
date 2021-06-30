@@ -6,12 +6,9 @@ import { SignIn } from "./components/user/SignIn";
 
 const routes = [
   {type:"title", to:"/", rName:"AnimeOpe",component:null},
-  {type:"opt", to:"/login", rName:"Log-In",component:Login},
-  {type:"opt", to:"/singIn", rName:"Sign In",component:SignIn},
   {type:"opt", to:"/Public/Search/Random", rName:"Random",component:PublicOpeningsGetter},
-  {type:"ddOpt", to:null, rName:"About", component:null, opts:[
-    
-  ]},
+  {type:"opt", to:"/singIn", rName:"Sign In",component:SignIn},
+  {type:"opt", to:"/login", rName:"Log-In",component:Login},
 
 ];
 
